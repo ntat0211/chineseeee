@@ -470,7 +470,61 @@ function updateStats() {
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
 
-// ===== START =====
+// ===== LOCAL STORAGE =====
+const STORAGE_KEY = 'hsk_app_state';
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      currentLevel: state.currentLevel,
+      currentIndex: state.currentIndex,
+      currentMode: state.currentMode,
+      answers: state.answers,
+      correct: state.correct,
+      streak: state.streak,
+    }));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const s = JSON.parse(raw);
+    if (s.currentLevel && DATA[s.currentLevel]) {
+      state.currentLevel = s.currentLevel;
+      state.currentIndex = s.currentIndex || 0;
+      state.currentMode = s.currentMode || 'quiz';
+      state.answers = s.answers || {};
+      state.correct = s.correct || 0;
+      state.streak = s.streak || 0;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+function init() {
+  if (!loadState()) {
+    state.currentLevel = Object.keys(DATA)[0];
+    state.currentIndex = 0;
+    state.answers = {};
+    state.correct = 0;
+    state.streak = 0;
+  }
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === state.currentMode);
+  });
+  renderLevelTabs();
+  renderContent();
+  updateStats();
+}
+
+// Auto-save mỗi khi chuyển câu hoặc thay đổi
+const _saveWrap = { renderContent, handleOptionClick };
+const origRC = renderContent;
+renderContent = function() { origRC(); saveState(); };
+
 init();
 </script>
 </body>
