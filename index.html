@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -12,100 +12,128 @@
 :root{--primary:#F2E4C9;--secondary:#FDF6EB;--accent:#A60303;--accent-dark:#7A0202;--text:#1a1a2e;--text-light:#555;--success:#4CAF50;--error:#F44336;--white:#fff;--shadow:0 4px 20px rgba(0,0,0,.08);--radius:16px}
 body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,var(--primary),var(--secondary),var(--primary));min-height:100vh;color:var(--text);overflow-x:hidden}
 .container{max-width:900px;margin:0 auto;padding:20px}
-header{text-align:center;padding:30px 20px 20px}
+header{text-align:center;padding:20px 20px 16px}
 header h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;background:linear-gradient(135deg,var(--accent-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 header p{font-size:.9rem;color:var(--text-light);margin-top:6px}
-.upload-zone{border:2px dashed var(--accent);border-radius:var(--radius);padding:32px 20px;text-align:center;background:rgba(255,255,255,.6);backdrop-filter:blur(10px);transition:.3s;cursor:pointer;margin-bottom:20px}
-.upload-zone:hover,.upload-zone.dragover{border-color:var(--accent-dark);background:rgba(255,255,255,.85);transform:scale(1.01)}
-.upload-zone svg{width:48px;height:48px;fill:var(--accent);margin-bottom:12px}
-.upload-zone h3{font-weight:700;margin-bottom:4px}
-.upload-zone p{font-size:.8rem;color:var(--text-light)}
-.upload-zone input[type=file]{display:none}
-.stats-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
-.stat-card{background:var(--white);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);text-align:center;flex:1;min-width:80px;max-width:140px}
-.stat-card .num{font-size:1.4rem;font-weight:800;color:var(--accent)}
-.stat-card .label{font-size:.7rem;color:var(--text-light);margin-top:2px}
-.level-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-.level-tab{padding:8px 16px;border-radius:30px;border:2px solid var(--accent);background:rgba(255,255,255,.7);font-weight:600;font-size:.82rem;cursor:pointer;transition:.3s;user-select:none}
+.stats-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.stat-card{background:var(--white);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);text-align:center;flex:1;min-width:70px;max-width:140px}
+.stat-card .num{font-size:1.3rem;font-weight:800;color:var(--accent)}
+.stat-card .label{font-size:.65rem;color:var(--text-light);margin-top:2px}
+.level-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+.level-tab{padding:7px 14px;border-radius:30px;border:2px solid var(--accent);background:rgba(255,255,255,.7);font-weight:600;font-size:.78rem;cursor:pointer;transition:.3s;user-select:none}
 .level-tab:hover{background:var(--primary)}
 .level-tab.active{background:var(--accent);color:var(--white);border-color:var(--accent)}
-.group-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-.group-tab{padding:6px 12px;border-radius:20px;border:1.5px solid #d4b896;background:rgba(255,255,255,.5);font-weight:500;font-size:.75rem;cursor:pointer;transition:.3s}
+.group-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.group-tab{padding:5px 10px;border-radius:20px;border:1.5px solid #d4b896;background:rgba(255,255,255,.5);font-weight:500;font-size:.72rem;cursor:pointer;transition:.3s}
 .group-tab:hover{background:var(--primary)}
 .group-tab.active{background:var(--accent-dark);color:var(--white);border-color:var(--accent-dark)}
-.mode-toggle{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
-.mode-btn{padding:8px 18px;border-radius:30px;border:none;font-weight:600;font-size:.8rem;cursor:pointer;transition:.3s;background:rgba(255,255,255,.7)}
+.mode-toggle{display:flex;gap:6px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.mode-btn{padding:7px 16px;border-radius:30px;border:none;font-weight:600;font-size:.76rem;cursor:pointer;transition:.3s;background:rgba(255,255,255,.7)}
 .mode-btn.active{background:var(--accent);color:var(--white)}
-.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 20px;margin-bottom:16px;transition:.3s;animation:fadeIn .4s ease}
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 18px;margin-bottom:14px;transition:.3s;animation:fadeIn .4s ease}
 .card.correct{border-left:4px solid var(--success)}
-.card.wrong{border-left:4px solid var(--error)}
+.card.wrong-final{border-left:4px solid var(--error);background:#FFF5F5}
 @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.card-level{font-size:.72rem;font-weight:600;background:var(--secondary);color:var(--accent);padding:3px 10px;border-radius:20px}
-.card-type{font-size:.72rem;font-weight:600;color:var(--text-light)}
-.hanzi{font-size:clamp(2.5rem,8vw,4rem);font-weight:800;text-align:center;color:var(--accent);margin:8px 0;line-height:1.2}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px}
+.card-level{font-size:.68rem;font-weight:600;background:var(--secondary);color:var(--accent);padding:3px 10px;border-radius:20px}
+.card-type{font-size:.68rem;font-weight:600;color:var(--text-light)}
+.attempts-text{font-size:.68rem;color:var(--text-light);font-weight:500}
+.hanzi{font-size:clamp(2.5rem,8vw,4rem);font-weight:800;text-align:center;color:var(--accent);margin:6px 0;line-height:1.2}
 .pinyin{text-align:center;font-size:1rem;color:var(--accent-dark);margin-bottom:4px}
-.meaning-q{text-align:center;font-size:.95rem;color:var(--text-light);margin-bottom:16px;font-weight:600}
+.meaning-q{text-align:center;font-size:.9rem;color:var(--text-light);margin-bottom:14px;font-weight:600}
 .options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.option{padding:12px;border:2px solid #e0e0e0;border-radius:12px;cursor:pointer;transition:.2s;font-weight:500;font-size:.85rem;text-align:center;user-select:none;background:var(--white)}
-.option:hover{border-color:var(--accent);background:var(--secondary)}
-.option.correct-answer{border-color:var(--success);background:#E8F5E9}
-.option.wrong-answer{border-color:var(--error);background:#FFEBEE}
-.feedback{margin-top:12px;padding:10px 14px;border-radius:10px;font-weight:600;font-size:.85rem;display:none}
+.option{padding:11px;border:2px solid #e0e0e0;border-radius:12px;cursor:pointer;transition:.2s;font-weight:500;font-size:.82rem;text-align:center;user-select:none;background:var(--white)}
+.option:hover:not(.disabled){border-color:var(--accent);background:var(--secondary)}
+.option.correct-answer{border-color:var(--success)!important;background:#E8F5E9!important}
+.option.wrong-answer{border-color:var(--error)!important;background:#FFEBEE!important;opacity:.6}
+.option.disabled{pointer-events:none;opacity:.5}
+.option.disabled.correct-answer{opacity:1}
+.feedback{margin-top:10px;padding:9px 12px;border-radius:10px;font-weight:600;font-size:.82rem;display:none}
 .feedback.show{display:block}
 .feedback.correct{background:#E8F5E9;color:#2E7D32}
-.feedback.wrong{background:#FFEBEE;color:#C62828}
-.progress-bar{width:100%;height:6px;background:#e0e0e0;border-radius:10px;margin:16px 0;overflow:hidden}
+.feedback.wrong{background:#FFF3E0;color:#E65100}
+.feedback.wrong-final{background:#FFEBEE;color:#C62828}
+.progress-bar{width:100%;height:5px;background:#e0e0e0;border-radius:10px;margin:14px 0;overflow:hidden}
 .progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-dark));border-radius:10px;transition:width .4s ease}
-.progress-text{text-align:center;font-size:.75rem;color:var(--text-light)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 24px;border:none;border-radius:30px;font-weight:700;font-size:.85rem;cursor:pointer;transition:.3s;font-family:inherit}
+.progress-text{text-align:center;font-size:.72rem;color:var(--text-light)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 20px;border:none;border-radius:30px;font-weight:700;font-size:.8rem;cursor:pointer;transition:.3s;font-family:inherit}
 .btn-primary{background:var(--accent);color:var(--white)}
 .btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
 .btn-secondary{background:rgba(255,255,255,.8);color:var(--accent);border:2px solid var(--accent)}
 .btn-secondary:hover{background:var(--primary)}
-.btn-group{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-.flashcard{perspective:1000px;height:260px;cursor:pointer;margin:16px 0}
+.btn-group{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.flashcard{perspective:1000px;height:250px;cursor:pointer;margin:14px 0}
 .flashcard-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
 .flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
 .flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow)}
 .flashcard-front{background:var(--white)}
 .flashcard-back{background:var(--secondary);transform:rotateY(180deg)}
-.flashcard-front .hanzi{font-size:4.5rem}
+.flashcard-front .hanzi{font-size:4.2rem}
 .flashcard-back .info{text-align:center}
-.flashcard-back .pinyin{font-size:1.2rem;font-weight:600}
-.flashcard-back .meaning{font-size:1rem;margin-top:6px;color:var(--text)}
-.flip-hint{font-size:.72rem;color:var(--text-light);margin-top:8px}
-.vocab-list{display:grid;gap:8px}
-.vocab-item{display:flex;align-items:center;gap:12px;background:var(--white);border-radius:12px;padding:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.vocab-item .char{font-size:1.6rem;font-weight:700;color:var(--accent);min-width:45px;text-align:center}
+.flashcard-back .pinyin{font-size:1.1rem;font-weight:600}
+.flashcard-back .meaning{font-size:.95rem;margin-top:5px;color:var(--text)}
+.flip-hint{font-size:.68rem;color:var(--text-light);margin-top:6px}
+.vocab-list{display:grid;gap:7px}
+.vocab-item{display:flex;align-items:center;gap:10px;background:var(--white);border-radius:10px;padding:10px 14px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.vocab-item .char{font-size:1.5rem;font-weight:700;color:var(--accent);min-width:40px;text-align:center}
 .vocab-item .info{flex:1}
-.vocab-item .info .py{font-weight:600;color:var(--accent-dark);font-size:.85rem}
-.vocab-item .info .mean{font-size:.8rem;color:var(--text-light)}
-.result{text-align:center;padding:32px 20px}
-.result .score{font-size:3.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.result .msg{font-size:1.1rem;font-weight:600;margin:8px 0 4px}
-.result .detail{color:var(--text-light);font-size:.85rem}
+.vocab-item .info .py{font-weight:600;color:var(--accent-dark);font-size:.82rem}
+.vocab-item .info .mean{font-size:.76rem;color:var(--text-light)}
+.vocab-item .badge{font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:10px}
+.vocab-item .badge.done{background:#E8F5E9;color:#2E7D32}
+.vocab-item .badge.failed{background:#FFEBEE;color:#C62828}
+.result{text-align:center;padding:28px 18px}
+.result .score{font-size:3.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.result .msg{font-size:1rem;font-weight:600;margin:6px 0 3px}
+.result .detail{color:var(--text-light);font-size:.82rem}
+.reset-row{text-align:center;margin-bottom:10px}
+.btn-reset{background:transparent;color:var(--accent);border:1px solid var(--accent);font-size:.68rem;padding:5px 12px;border-radius:20px;cursor:pointer;font-weight:600;font-family:inherit;transition:.3s}
+.btn-reset:hover{background:var(--accent);color:var(--white)}
+/* ADD CARD FORM */
+.add-card-section{margin-top:8px}
+.add-card-section h3{font-size:.9rem;font-weight:700;margin-bottom:10px;color:var(--accent)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:3px}
+.form-group label{font-size:.68rem;font-weight:600;color:var(--text-light)}
+.form-group input,.form-group select{padding:8px 12px;border:1.5px solid #d4b896;border-radius:10px;font-size:.85rem;font-family:inherit;outline:none;transition:.3s;background:var(--white)}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(166,3,3,.1)}
+.form-actions{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.btn-add{background:var(--accent);color:var(--white);border:none;padding:9px 24px;border-radius:30px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:inherit;transition:.3s}
+.btn-add:hover{background:var(--accent-dark)}
+.btn-export{background:transparent;color:var(--accent);border:1.5px solid var(--accent);padding:9px 20px;border-radius:30px;font-weight:600;font-size:.76rem;cursor:pointer;font-family:inherit;transition:.3s}
+.btn-export:hover{background:var(--accent);color:var(--white)}
+.btn-import{background:transparent;color:#0288D1;border:1.5px solid #0288D1;padding:9px 20px;border-radius:30px;font-weight:600;font-size:.76rem;cursor:pointer;font-family:inherit;transition:.3s}
+.btn-import:hover{background:#0288D1;color:var(--white)}
+.my-cards-list{margin-top:16px}
+.my-cards-list h3{font-size:.85rem;font-weight:700;margin-bottom:8px;color:var(--accent)}
+.my-card-item{display:flex;align-items:center;gap:10px;background:var(--white);border-radius:10px;padding:9px 14px;box-shadow:0 2px 6px rgba(0,0,0,.04);margin-bottom:6px}
+.my-card-item .char{font-size:1.4rem;font-weight:700;color:var(--accent);min-width:36px;text-align:center}
+.my-card-item .info{flex:1}
+.my-card-item .py{font-weight:600;color:var(--accent-dark);font-size:.8rem}
+.my-card-item .mean{font-size:.74rem;color:var(--text-light)}
+.my-card-item .del-btn{background:none;border:none;color:var(--error);cursor:pointer;font-size:1.1rem;padding:4px 8px;border-radius:8px;transition:.2s}
+.my-card-item .del-btn:hover{background:#FFEBEE}
 .hidden{display:none!important}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .shake{animation:shake .4s ease}
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
 .pop{animation:pop .3s ease}
 #confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
-@media(max-width:600px){.container{padding:12px}header{padding:20px 12px 12px}.card{padding:18px 14px}.options{grid-template-columns:1fr}.stat-card{padding:8px 12px;min-width:70px}.stat-card .num{font-size:1.2rem}.level-tab{padding:7px 12px;font-size:.75rem}.group-tab{padding:5px 10px;font-size:.7rem}.flashcard{height:220px}.flashcard-front .hanzi{font-size:3.5rem}.btn{padding:8px 18px;font-size:.78rem}}
-@media(max-width:380px){.stats-bar{gap:6px}.stat-card{padding:6px 8px;min-width:65px}.stat-card .num{font-size:1rem}}
+@media(max-width:600px){.container{padding:10px}header{padding:16px 10px 10px}.card{padding:16px 12px}.options{grid-template-columns:1fr}.stat-card{padding:7px 10px;min-width:65px}.stat-card .num{font-size:1.1rem}.level-tab{padding:6px 10px;font-size:.72rem}.group-tab{padding:4px 8px;font-size:.68rem}.flashcard{height:210px}.flashcard-front .hanzi{font-size:3.2rem}.btn{padding:7px 16px;font-size:.74rem}.form-row{grid-template-columns:1fr}}
+@media(max-width:380px){.stats-bar{gap:5px}.stat-card{padding:5px 7px;min-width:60px}.stat-card .num{font-size:1rem}}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 <canvas id="confetti"></canvas>
 <div class="container">
-  <header><h1>漢語記憶 Hán Ngữ Ký Ức</h1><p>Phát Triển Hán Ngữ · Sơ Cấp · Bài 16-25</p></header>
-  <div class="upload-zone" id="uploadZone">
-    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-5-6H7v-2h6v2zm0-4H7V8h6v2z"/></svg>
-    <h3>Upload thêm tài liệu (tuỳ chọn)</h3>
-    <p>Đã có sẵn từ vựng Bài 16-25, hoặc upload file Excel mới</p>
-    <input type="file" id="fileInput" accept=".xlsx,.xls">
+  <header>
+    <h1>漢語記憶 Hán Ngữ Ký Ức</h1>
+    <p>Phát Triển Hán Ngữ · Sơ Cấp · Bài 16-25 · 229 từ vựng</p>
+  </header>
+  <div class="reset-row">
+    <button class="btn-reset" id="resetBtn">🔄 Xóa tiến trình</button>
   </div>
   <div id="app">
     <div class="stats-bar">
@@ -120,6 +148,7 @@ header p{font-size:.9rem;color:var(--text-light);margin-top:6px}
       <button class="mode-btn active" data-mode="quiz">Quiz</button>
       <button class="mode-btn" data-mode="flashcard">Flashcard</button>
       <button class="mode-btn" data-mode="list">Danh sách</button>
+      <button class="mode-btn" data-mode="mycards">＋ Thẻ của tui</button>
     </div>
     <div id="content"></div>
     <div class="progress-bar"><div class="fill" id="progressFill" style="width:0%"></div></div>
@@ -134,29 +163,122 @@ header p{font-size:.9rem;color:var(--text-light);margin-top:6px}
 const DATA = {"Bài 16":[[{"hanzi":"结婚","pinyin":"jié hūn","meaning":"kết hôn","type":"từ vựng","grammar":"","example":""},{"hanzi":"送","pinyin":"sòng","meaning":"đưa, tặng","type":"từ vựng","grammar":"","example":""},{"hanzi":"份","pinyin":"fèn","meaning":"phần, bản, suất","type":"từ vựng","grammar":"","example":""},{"hanzi":"少","pinyin":"shǎo","meaning":"ít","type":"từ vựng","grammar":"","example":""},{"hanzi":"应该","pinyin":"yīnggāi","meaning":"nên","type":"từ vựng","grammar":"","example":""},{"hanzi":"希望","pinyin":"xīwàng","meaning":"hi vọng, mong muốn, ước ao","type":"từ vựng","grammar":"","example":""},{"hanzi":"参加","pinyin":"cānjiā","meaning":"tham gia, tham dự","type":"từ vựng","grammar":"","example":""},{"hanzi":"婚礼","pinyin":"hūnlǐ","meaning":"hôn lễ, đám cưới","type":"từ vựng","grammar":"","example":""},{"hanzi":"重要","pinyin":"zhòngyào","meaning":"trọng yếu, quan trọng","type":"từ vựng","grammar":"","example":""},{"hanzi":"事情","pinyin":"shìqing","meaning":"sự tình, sự việc","type":"từ vựng","grammar":"","example":""},{"hanzi":"特殊","pinyin":"tèshū","meaning":"đặc thù, đặc biệt","type":"từ vựng","grammar":"","example":""},{"hanzi":"到时候","pinyin":"dào shíhou","meaning":"đến lúc đó","type":"từ vựng","grammar":"","example":""},{"hanzi":"照相","pinyin":"zhào xiàng","meaning":"chụp ảnh, chụp hình","type":"từ vựng","grammar":"","example":""},{"hanzi":"照片","pinyin":"zhàopiàn","meaning":"tấm ảnh, bức ảnh","type":"từ vựng","grammar":"","example":""},{"hanzi":"有意思","pinyin":"yǒu yìsi","meaning":"thú vị","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"一定","pinyin":"yīdìng","meaning":"nhất định","type":"từ vựng","grammar":"","example":""},{"hanzi":"亲戚","pinyin":"qīnqi","meaning":"họ hàng, người thân","type":"từ vựng","grammar":"","example":""},{"hanzi":"麻烦","pinyin":"máfan","meaning":"phiền toái, phiền phức","type":"từ vựng","grammar":"","example":""},{"hanzi":"给","pinyin":"gěi","meaning":"cho, đưa cho","type":"từ vựng","grammar":"","example":""},{"hanzi":"简单","pinyin":"jiǎndān","meaning":"đơn giản","type":"từ vựng","grammar":"","example":""},{"hanzi":"办法","pinyin":"bànfǎ","meaning":"biện pháp, cách làm","type":"từ vựng","grammar":"","example":""}]],"Bài 17":[[{"hanzi":"做客","pinyin":"zuò kè","meaning":"làm khách","type":"từ vựng","grammar":"","example":""},{"hanzi":"爱人","pinyin":"àiren","meaning":"vợ/chồng","type":"từ vựng","grammar":"","example":""},{"hanzi":"教","pinyin":"jiāo","meaning":"dạy","type":"từ vựng","grammar":"","example":""},{"hanzi":"包","pinyin":"bāo","meaning":"bao, gói, bọc","type":"từ vựng","grammar":"","example":""},{"hanzi":"饺子","pinyin":"jiǎozi","meaning":"sủi cảo","type":"từ vựng","grammar":"","example":""},{"hanzi":"葡萄酒","pinyin":"pútaojiǔ","meaning":"rượu nho","type":"từ vựng","grammar":"","example":""},{"hanzi":"啤酒","pinyin":"píjiǔ","meaning":"bia","type":"từ vựng","grammar":"","example":""},{"hanzi":"才","pinyin":"cái","meaning":"mới (chỉ chuyện xảy ra muộn, trễ)","type":"từ vựng","grammar":"","example":""},{"hanzi":"热闹","pinyin":"rènao","meaning":"tưng bừng, náo nhiệt, sôi nổi","type":"từ vựng","grammar":"","example":""},{"hanzi":"瓶","pinyin":"píng","meaning":"bình, lọ","type":"từ vựng","grammar":"","example":""},{"hanzi":"最近","pinyin":"zuìjìn","meaning":"gần đây, vừa qua","type":"từ vựng","grammar":"","example":""},{"hanzi":"说话","pinyin":"shuō huà","meaning":"trò chuyện, nói chuyện","type":"từ vựng","grammar":"","example":""},{"hanzi":"第一","pinyin":"dì yī","meaning":"thứ nhất, hạng nhất","type":"từ vựng","grammar":"","example":""},{"hanzi":"第","pinyin":"dì","meaning":"thứ","type":"từ vựng","grammar":"","example":""},{"hanzi":"次","pinyin":"cì","meaning":"lần, lượt, chuyến","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"难","pinyin":"nán","meaning":"khó","type":"từ vựng","grammar":"","example":""},{"hanzi":"学","pinyin":"xué","meaning":"học, học tập","type":"từ vựng","grammar":"","example":""}]],"Bài 18":[[{"hanzi":"最少","pinyin":"zuì shǎo","meaning":"ít nhất","type":"từ vựng","grammar":"","example":""},{"hanzi":"小时","pinyin":"xiǎoshí","meaning":"tiếng đồng hồ, giờ đồng hồ","type":"từ vựng","grammar":"","example":""},{"hanzi":"网","pinyin":"wǎng","meaning":"mạng, lưới","type":"từ vựng","grammar":"","example":""},{"hanzi":"不常","pinyin":"bù cháng","meaning":"không thường","type":"từ vựng","grammar":"","example":""},{"hanzi":"常","pinyin":"cháng","meaning":"thường xuyên, luôn luôn","type":"từ vựng","grammar":"","example":""},{"hanzi":"上","pinyin":"shàng","meaning":"ở trên, bên trên","type":"từ vựng","grammar":"","example":""},{"hanzi":"新闻","pinyin":"xīnwén","meaning":"tin tức","type":"từ vựng","grammar":"","example":""},{"hanzi":"另外","pinyin":"lìngwài","meaning":"ngoài ra","type":"từ vựng","grammar":"","example":""},{"hanzi":"查","pinyin":"chá","meaning":"kiểm tra, tra cứu","type":"từ vựng","grammar":"","example":""},{"hanzi":"邮件","pinyin":"yóujiàn","meaning":"mail, e-mail","type":"từ vựng","grammar":"","example":""},{"hanzi":"聊","pinyin":"liáo","meaning":"nói chuyện phiếm, tán ngẫu","type":"từ vựng","grammar":"","example":""},{"hanzi":"长","pinyin":"cháng","meaning":"dài","type":"từ vựng","grammar":"","example":""},{"hanzi":"都","pinyin":"dōu","meaning":"đều","type":"từ vựng","grammar":"","example":""},{"hanzi":"一直","pinyin":"yīzhí","meaning":"luôn luôn, liên tục","type":"từ vựng","grammar":"","example":""},{"hanzi":"忘","pinyin":"wàng","meaning":"quên","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"多长时间","pinyin":"duō cháng shíjiān","meaning":"bao lâu","type":"từ vựng","grammar":"","example":""},{"hanzi":"多","pinyin":"duō","meaning":"dùng để hỏi về mức độ","type":"từ vựng","grammar":"","example":""},{"hanzi":"邮箱","pinyin":"yóuxiāng","meaning":"hộp thư, hòm thư","type":"từ vựng","grammar":"","example":""},{"hanzi":"发","pinyin":"fā","meaning":"gửi","type":"từ vựng","grammar":"","example":""},{"hanzi":"网站","pinyin":"wǎngzhàn","meaning":"website, trang mạng","type":"từ vựng","grammar":"","example":""},{"hanzi":"一会儿","pinyin":"yīhuìr","meaning":"một lúc","type":"từ vựng","grammar":"","example":""},{"hanzi":"给","pinyin":"gěi","meaning":"dùng để giới thiệu đối tượng tiếp nhận","type":"từ vựng","grammar":"","example":""}]],"Bài 19":[[{"hanzi":"暖气","pinyin":"nuǎnqì","meaning":"lò sưởi, hệ thống sưởi hơi","type":"từ vựng","grammar":"","example":""},{"hanzi":"坏","pinyin":"huài","meaning":"hỏng","type":"từ vựng","grammar":"","example":""},{"hanzi":"棉衣","pinyin":"miányī","meaning":"áo bông","type":"từ vựng","grammar":"","example":""},{"hanzi":"戴","pinyin":"dài","meaning":"đeo, đội","type":"từ vựng","grammar":"","example":""},{"hanzi":"手套","pinyin":"shǒutào","meaning":"găng tay","type":"từ vựng","grammar":"","example":""},{"hanzi":"帽子","pinyin":"màozi","meaning":"mũ, nón","type":"từ vựng","grammar":"","example":""},{"hanzi":"后来","pinyin":"hòulái","meaning":"sau này","type":"từ vựng","grammar":"","example":""},{"hanzi":"只好","pinyin":"zhǐhǎo","meaning":"đành phải","type":"từ vựng","grammar":"","example":""},{"hanzi":"打开","pinyin":"dǎkāi","meaning":"mở, kéo ra","type":"từ vựng","grammar":"","example":""},{"hanzi":"空调","pinyin":"kōngtiáo","meaning":"điều hòa nhiệt độ","type":"từ vựng","grammar":"","example":""},{"hanzi":"房东","pinyin":"fángdōng","meaning":"chủ nhà","type":"từ vựng","grammar":"","example":""},{"hanzi":"打（电话）","pinyin":"dǎ (diànhuà)","meaning":"gọi điện thoại","type":"từ vựng","grammar":"","example":""},{"hanzi":"修","pinyin":"xiū","meaning":"sửa chữa","type":"từ vựng","grammar":"","example":""},{"hanzi":"等","pinyin":"děng","meaning":"chờ đợi","type":"từ vựng","grammar":"","example":""},{"hanzi":"看见","pinyin":"kànjiàn","meaning":"trông thấy, nhìn thấy","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"先生","pinyin":"xiānsheng","meaning":"ông, ngài","type":"từ vựng","grammar":"","example":""},{"hanzi":"天","pinyin":"tiān","meaning":"ngày","type":"từ vựng","grammar":"","example":""},{"hanzi":"过去","pinyin":"guòqu","meaning":"đi qua","type":"từ vựng","grammar":"","example":""},{"hanzi":"抱歉","pinyin":"bàoqiàn","meaning":"xin lỗi","type":"từ vựng","grammar":"","example":""},{"hanzi":"保证","pinyin":"bǎozhèng","meaning":"cam đoan, bảo đảm","type":"từ vựng","grammar":"","example":""},{"hanzi":"以前","pinyin":"yǐqián","meaning":"trước đây, ngày trước","type":"từ vựng","grammar":"","example":""},{"hanzi":"要","pinyin":"yào","meaning":"cần phải","type":"từ vựng","grammar":"","example":""}]],"Bài 20":[[{"hanzi":"经常","pinyin":"jīngcháng","meaning":"thường xuyên, luôn luôn","type":"từ vựng","grammar":"","example":""},{"hanzi":"一些","pinyin":"yīxiē","meaning":"một vài, một số","type":"từ vựng","grammar":"","example":""},{"hanzi":"快餐店","pinyin":"kuàicāndiàn","meaning":"tiệm đồ ăn nhanh","type":"từ vựng","grammar":"","example":""},{"hanzi":"快餐","pinyin":"kuàicān","meaning":"đồ ăn nhanh","type":"từ vựng","grammar":"","example":""},{"hanzi":"店","pinyin":"diàn","meaning":"cửa tiệm, cửa hàng","type":"từ vựng","grammar":"","example":""},{"hanzi":"卖","pinyin":"mài","meaning":"bán, buôn bán","type":"từ vựng","grammar":"","example":""},{"hanzi":"外卖","pinyin":"wàimài","meaning":"đồ mang về","type":"từ vựng","grammar":"","example":""},{"hanzi":"有名","pinyin":"yǒu míng","meaning":"nổi tiếng","type":"từ vựng","grammar":"","example":""},{"hanzi":"外国","pinyin":"wàiguó","meaning":"nước ngoài","type":"từ vựng","grammar":"","example":""},{"hanzi":"坐","pinyin":"zuò","meaning":"ngồi","type":"từ vựng","grammar":"","example":""},{"hanzi":"热","pinyin":"rè","meaning":"nóng","type":"từ vựng","grammar":"","example":""},{"hanzi":"舒服","pinyin":"shūfu","meaning":"thoải mái, dễ chịu","type":"từ vựng","grammar":"","example":""},{"hanzi":"服务员","pinyin":"fúwùyuán","meaning":"người phục vụ","type":"từ vựng","grammar":"","example":""},{"hanzi":"欢迎","pinyin":"huānyíng","meaning":"hoan nghênh, chào mừng","type":"từ vựng","grammar":"","example":""},{"hanzi":"光临","pinyin":"guānglín","meaning":"đến dự, hạ cố","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"外边","pinyin":"wàibian","meaning":"bên ngoài","type":"từ vựng","grammar":"","example":""},{"hanzi":"满","pinyin":"mǎn","meaning":"đầy, chật","type":"từ vựng","grammar":"","example":""},{"hanzi":"比萨饼","pinyin":"bǐsàbǐng","meaning":"bánh Pizza","type":"từ vựng","grammar":"","example":""},{"hanzi":"别的","pinyin":"biéde","meaning":"cái khác","type":"từ vựng","grammar":"","example":""},{"hanzi":"来","pinyin":"lái","meaning":"đến","type":"từ vựng","grammar":"","example":""},{"hanzi":"面条","pinyin":"miàntiáo","meaning":"mì sợi","type":"từ vựng","grammar":"","example":""},{"hanzi":"可乐","pinyin":"kělè","meaning":"Coca","type":"từ vựng","grammar":"","example":""},{"hanzi":"走","pinyin":"zǒu","meaning":"đi","type":"từ vựng","grammar":"","example":""},{"hanzi":"好的","pinyin":"hǎode","meaning":"được thôi","type":"từ vựng","grammar":"","example":""}]],"Bài 21":[[{"hanzi":"付钱","pinyin":"fù qián","meaning":"thanh toán, trả tiền","type":"từ vựng","grammar":"","example":""},{"hanzi":"付","pinyin":"fù","meaning":"trả","type":"từ vựng","grammar":"","example":""},{"hanzi":"国家","pinyin":"guójiā","meaning":"quốc gia, nước","type":"từ vựng","grammar":"","example":""},{"hanzi":"自己","pinyin":"zìjǐ","meaning":"tự bản thân, tự mình","type":"từ vựng","grammar":"","example":""},{"hanzi":"办法","pinyin":"bànfǎ","meaning":"cách làm","type":"từ vựng","grammar":"","example":""},{"hanzi":"AA制","pinyin":"AA zhì","meaning":"kiểu AA","type":"từ vựng","grammar":"","example":""},{"hanzi":"年轻人","pinyin":"niánqīngrén","meaning":"người trẻ tuổi, thanh niên","type":"từ vựng","grammar":"","example":""},{"hanzi":"年轻","pinyin":"niánqīng","meaning":"trẻ","type":"từ vựng","grammar":"","example":""},{"hanzi":"影响","pinyin":"yǐngxiǎng","meaning":"ảnh hưởng","type":"từ vựng","grammar":"","example":""},{"hanzi":"愿意","pinyin":"yuànyì","meaning":"bằng lòng, sẵn lòng, mong muốn","type":"từ vựng","grammar":"","example":""},{"hanzi":"大多数","pinyin":"dàduōshù","meaning":"phần lớn, số đông","type":"từ vựng","grammar":"","example":""},{"hanzi":"习惯","pinyin":"xíguàn","meaning":"quen với việc...","type":"từ vựng","grammar":"","example":""},{"hanzi":"结账","pinyin":"jiézhàng","meaning":"thanh toán, tính tiền","type":"từ vựng","grammar":"","example":""},{"hanzi":"你们","pinyin":"nǐmen","meaning":"các bạn, chúng mình","type":"từ vựng","grammar":"","example":""},{"hanzi":"小费","pinyin":"xiǎofèi","meaning":"tiền boa, tiền tip","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"这些","pinyin":"zhèxie","meaning":"những thứ này","type":"từ vựng","grammar":"","example":""},{"hanzi":"打包","pinyin":"dǎ bāo","meaning":"gói đồ ăn còn thừa ở quán về","type":"từ vựng","grammar":"","example":""},{"hanzi":"把","pinyin":"bǎ","meaning":"dùng khi tim từ là người nhận của hành động","type":"từ vựng","grammar":"","example":""},{"hanzi":"饭盒","pinyin":"fànhé","meaning":"hộp cơm, lunch box","type":"từ vựng","grammar":"","example":""},{"hanzi":"放","pinyin":"fàng","meaning":"đặt, để","type":"từ vựng","grammar":"","example":""},{"hanzi":"袋子","pinyin":"dàizi","meaning":"túi, cái túi","type":"từ vựng","grammar":"","example":""},{"hanzi":"零钱","pinyin":"língqián","meaning":"tiền lẻ","type":"từ vựng","grammar":"","example":""},{"hanzi":"收","pinyin":"shōu","meaning":"thu, nhận","type":"từ vựng","grammar":"","example":""},{"hanzi":"所有","pinyin":"suǒyǒu","meaning":"tất cả, mọi thứ","type":"từ vựng","grammar":"","example":""},{"hanzi":"宾馆","pinyin":"bīnguǎn","meaning":"khách sạn, hotel","type":"từ vựng","grammar":"","example":""},{"hanzi":"酒吧","pinyin":"jiǔbā","meaning":"quán bar, quán rượu","type":"từ vựng","grammar":"","example":""},{"hanzi":"有的","pinyin":"yǒude","meaning":"một vài","type":"từ vựng","grammar":"","example":""},{"hanzi":"清楚","pinyin":"qīngchu","meaning":"rõ ràng, chi tiết","type":"từ vựng","grammar":"","example":""}]],"Bài 22":[[{"hanzi":"黄色","pinyin":"huángsè","meaning":"màu vàng","type":"từ vựng","grammar":"","example":""},{"hanzi":"黄","pinyin":"huáng","meaning":"vàng","type":"từ vựng","grammar":"","example":""},{"hanzi":"衬衫","pinyin":"chènshān","meaning":"áo sơ mi","type":"từ vựng","grammar":"","example":""},{"hanzi":"蓝色","pinyin":"lánsè","meaning":"màu xanh da trời","type":"từ vựng","grammar":"","example":""},{"hanzi":"上衣","pinyin":"shàngyī","meaning":"đồ mặc phía trên, chỉ áo","type":"từ vựng","grammar":"","example":""},{"hanzi":"条","pinyin":"tiáo","meaning":"dùng cho các đồ vật, đối tượng dài và thẻo","type":"từ vựng","grammar":"","example":""},{"hanzi":"黑色","pinyin":"hēisè","meaning":"màu đen","type":"từ vựng","grammar":"","example":""},{"hanzi":"黑","pinyin":"hēi","meaning":"đen","type":"từ vựng","grammar":"","example":""},{"hanzi":"裤子","pinyin":"kùzi","meaning":"quần","type":"từ vựng","grammar":"","example":""},{"hanzi":"那边","pinyin":"nàbiān","meaning":"nơi đó, đằng kia","type":"từ vựng","grammar":"","example":""},{"hanzi":"试衣间","pinyin":"shìyījiān","meaning":"phòng thay đồ","type":"từ vựng","grammar":"","example":""},{"hanzi":"换","pinyin":"huàn","meaning":"thay đổi, thay thế","type":"từ vựng","grammar":"","example":""},{"hanzi":"肥","pinyin":"féi","meaning":"rộng, lỏng, béo","type":"từ vựng","grammar":"","example":""},{"hanzi":"正好","pinyin":"zhènghǎo","meaning":"vừa vặn (thời gian, kích thước, con số...)","type":"từ vựng","grammar":"","example":""},{"hanzi":"双","pinyin":"shuāng","meaning":"đôi","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"鞋","pinyin":"xié","meaning":"giày","type":"từ vựng","grammar":"","example":""},{"hanzi":"便宜","pinyin":"piányí","meaning":"rẻ","type":"từ vựng","grammar":"","example":""},{"hanzi":"好看","pinyin":"hǎokàn","meaning":"đẹp, ưa nhìn","type":"từ vựng","grammar":"","example":""},{"hanzi":"颜色","pinyin":"yánsè","meaning":"màu sắc, màu","type":"từ vựng","grammar":"","example":""},{"hanzi":"那边","pinyin":"nàbiān","meaning":"đó, đằng kia","type":"từ vựng","grammar":"","example":""},{"hanzi":"试衣间","pinyin":"shìyījiān","meaning":"phòng thay đồ, thử áo","type":"từ vựng","grammar":"","example":""},{"hanzi":"瘦","pinyin":"shòu","meaning":"ngắn","type":"từ vựng","grammar":"","example":""},{"hanzi":"换","pinyin":"huàn","meaning":"thay đổi, thay","type":"từ vựng","grammar":"","example":""},{"hanzi":"肥","pinyin":"féi","meaning":"bèo, lỏng","type":"từ vựng","grammar":"","example":""},{"hanzi":"正好","pinyin":"zhènghǎo","meaning":"vừa vặn (thời gian, kích thước, con số...)","type":"từ vựng","grammar":"","example":""},{"hanzi":"双","pinyin":"shuāng","meaning":"đôi","type":"từ vựng","grammar":"","example":""},{"hanzi":"鞋","pinyin":"xié","meaning":"giày","type":"từ vựng","grammar":"","example":""},{"hanzi":"便宜","pinyin":"piányí","meaning":"rẻ","type":"từ vựng","grammar":"","example":""},{"hanzi":"会","pinyin":"huì","meaning":"biết, có thể","type":"từ vựng","grammar":"","example":""},{"hanzi":"记错","pinyin":"jìcuò","meaning":"nhớ sai","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"错","pinyin":"cuò","meaning":"sai","type":"từ vựng","grammar":"","example":""},{"hanzi":"样子","pinyin":"yàngzi","meaning":"trông, bộ dạng","type":"từ vựng","grammar":"","example":""},{"hanzi":"红色","pinyin":"hóngsè","meaning":"màu đỏ","type":"từ vựng","grammar":"","example":""},{"hanzi":"红","pinyin":"hóng","meaning":"đỏ","type":"từ vựng","grammar":"","example":""}]],"Bài 23":[[{"hanzi":"特别","pinyin":"tèbié","meaning":"đặc biệt","type":"từ vựng","grammar":"","example":""},{"hanzi":"北方","pinyin":"běifāng","meaning":"phía Bắc, phương Bắc","type":"từ vựng","grammar":"","example":""},{"hanzi":"南方","pinyin":"nánfāng","meaning":"phía Nam, phương Nam","type":"từ vựng","grammar":"","example":""},{"hanzi":"下雪","pinyin":"xià xuě","meaning":"tuyết rơi","type":"từ vựng","grammar":"","example":""},{"hanzi":"雪","pinyin":"xuě","meaning":"tuyết","type":"từ vựng","grammar":"","example":""},{"hanzi":"场","pinyin":"cháng","meaning":"cơn, trận","type":"từ vựng","grammar":"","example":""},{"hanzi":"气温","pinyin":"qìwēn","meaning":"nhiệt độ","type":"từ vựng","grammar":"","example":""},{"hanzi":"低","pinyin":"dī","meaning":"thấp","type":"từ vựng","grammar":"","example":""},{"hanzi":"零下","pinyin":"líng xià","meaning":"dưới không độ","type":"từ vựng","grammar":"","example":""},{"hanzi":"度","pinyin":"dù","meaning":"độ (đơn vị đo nhiệt độ)","type":"từ vựng","grammar":"","example":""},{"hanzi":"左右","pinyin":"zuǒyòu","meaning":"khoảng khoảng","type":"từ vựng","grammar":"","example":""},{"hanzi":"差不多","pinyin":"chàbuduō","meaning":"gần như","type":"từ vựng","grammar":"","example":""},{"hanzi":"老人","pinyin":"lǎorén","meaning":"người già","type":"từ vựng","grammar":"","example":""},{"hanzi":"年","pinyin":"nián","meaning":"năm","type":"từ vựng","grammar":"","example":""},{"hanzi":"寒冷","pinyin":"hánlěng","meaning":"lạnh giá","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"人们","pinyin":"rénmen","meaning":"mọi người, người ta","type":"từ vựng","grammar":"","example":""},{"hanzi":"突然","pinyin":"tūrán","meaning":"bỗng nhiên, đột nhiên","type":"từ vựng","grammar":"","example":""},{"hanzi":"变","pinyin":"biàn","meaning":"thay đổi","type":"từ vựng","grammar":"","example":""},{"hanzi":"专家","pinyin":"zhuānjiā","meaning":"chuyên gia","type":"từ vựng","grammar":"","example":""},{"hanzi":"地球","pinyin":"dìqiú","meaning":"địa cầu, trái đất","type":"từ vựng","grammar":"","example":""},{"hanzi":"暖","pinyin":"nuǎn","meaning":"ấm, ấm áp","type":"từ vựng","grammar":"","example":""},{"hanzi":"注意","pinyin":"zhùyì","meaning":"chú ý","type":"từ vựng","grammar":"","example":""},{"hanzi":"气候","pinyin":"qìhòu","meaning":"thời tiết, khí hậu","type":"từ vựng","grammar":"","example":""},{"hanzi":"爱","pinyin":"ài","meaning":"yêu","type":"từ vựng","grammar":"","example":""},{"hanzi":"锻炼","pinyin":"duànliàn","meaning":"luyện tập","type":"từ vựng","grammar":"","example":""},{"hanzi":"出门","pinyin":"chū mén","meaning":"ra ngoài, rời nhà đi","type":"từ vựng","grammar":"","example":""},{"hanzi":"季节","pinyin":"jìjié","meaning":"mùa","type":"từ vựng","grammar":"","example":""},{"hanzi":"下雨","pinyin":"xià yǔ","meaning":"mưa, đổ mưa","type":"từ vựng","grammar":"","example":""},{"hanzi":"雨","pinyin":"yǔ","meaning":"mưa","type":"từ vựng","grammar":"","example":""},{"hanzi":"正常","pinyin":"zhèngcháng","meaning":"bình thường","type":"từ vựng","grammar":"","example":""}]],"Bài 24":[[{"hanzi":"亲爱","pinyin":"qīn'ài","meaning":"thân yêu","type":"từ vựng","grammar":"","example":""},{"hanzi":"为了","pinyin":"wèile","meaning":"để, vì (biểu thị mục đích)","type":"từ vựng","grammar":"","example":""},{"hanzi":"庆祝","pinyin":"qìngzhù","meaning":"chúc mừng, chào mừng","type":"từ vựng","grammar":"","example":""},{"hanzi":"大使馆","pinyin":"dàshǐguǎn","meaning":"đại sứ quán","type":"từ vựng","grammar":"","example":""},{"hanzi":"层","pinyin":"céng","meaning":"tầng","type":"từ vựng","grammar":"","example":""},{"hanzi":"举行","pinyin":"jǔxíng","meaning":"tổ chức (gặp mặt, lễ hội...)","type":"từ vựng","grammar":"","example":""},{"hanzi":"晚会","pinyin":"wǎnhuì","meaning":"bữa tiệc, bữa tối","type":"từ vựng","grammar":"","example":""},{"hanzi":"地址","pinyin":"dìzhǐ","meaning":"địa chỉ","type":"từ vựng","grammar":"","example":""},{"hanzi":"联系","pinyin":"liánxi","meaning":"liên hệ, liên lạc","type":"từ vựng","grammar":"","example":""},{"hanzi":"如果","pinyin":"rúguǒ","meaning":"nếu","type":"từ vựng","grammar":"","example":""},{"hanzi":"活动","pinyin":"huódòng","meaning":"hoạt động","type":"từ vựng","grammar":"","example":""},{"hanzi":"就","pinyin":"jiù","meaning":"chỉ ra một kết quả tự nhiên trong các điều kiện hoặc hoàn cảnh nhất định","type":"từ vựng","grammar":"","example":""},{"hanzi":"短信","pinyin":"duǎnxìn","meaning":"tin nhắn","type":"từ vựng","grammar":"","example":""},{"hanzi":"平安大街","pinyin":"Píng'ān Dàjiē","meaning":"phố Bình An","type":"từ vựng","grammar":"","example":""},{"hanzi":"感恩节","pinyin":"Gǎn'ēn Jié","meaning":"Lễ Tạ ơn","type":"từ vựng","grammar":"","example":""}]],"Bài 25":[[{"hanzi":"懂","pinyin":"dǒng","meaning":"hiểu","type":"từ vựng","grammar":"","example":""},{"hanzi":"话","pinyin":"huà","meaning":"lời nói","type":"từ vựng","grammar":"","example":""},{"hanzi":"出租（汽）车","pinyin":"chūzū (qì) chē","meaning":"xe taxi","type":"từ vựng","grammar":"","example":""},{"hanzi":"虽然","pinyin":"suīrán","meaning":"tuy rằng, mặc dù","type":"từ vựng","grammar":"","example":""},{"hanzi":"司机","pinyin":"sījī","meaning":"lái xe, tài xế","type":"từ vựng","grammar":"","example":""},{"hanzi":"住院","pinyin":"zhùyuàn","meaning":"nằm viện","type":"từ vựng","grammar":"","example":""},{"hanzi":"担心","pinyin":"dānxīn","meaning":"lo lắng, bất an","type":"từ vựng","grammar":"","example":""},{"hanzi":"护士","pinyin":"hùshi","meaning":"y tá","type":"từ vựng","grammar":"","example":""},{"hanzi":"机会","pinyin":"jīhuì","meaning":"cơ hội","type":"từ vựng","grammar":"","example":""},{"hanzi":"感觉","pinyin":"gǎnjué","meaning":"cảm giác, cảm thấy","type":"từ vựng","grammar":"","example":""},{"hanzi":"早","pinyin":"zǎo","meaning":"sớm","type":"từ vựng","grammar":"","example":""},{"hanzi":"出院","pinyin":"chū yuàn","meaning":"ra viện","type":"từ vựng","grammar":"","example":""},{"hanzi":"好好儿","pinyin":"hǎohāor","meaning":"tốt lành, cố gắng hết sức","type":"từ vựng","grammar":"","example":""},{"hanzi":"饿","pinyin":"è","meaning":"đói","type":"từ vựng","grammar":"","example":""},{"hanzi":"光盘","pinyin":"guāngpán","meaning":"đĩa CD","type":"từ vựng","grammar":"","example":""}],[{"hanzi":"关心","pinyin":"guānxīn","meaning":"quan tâm","type":"từ vựng","grammar":"","example":""}]]};
 
 
+const STORAGE_PROGRESS = 'hnnu_progress';
+const STORAGE_CARDS = 'hnnu_custom_cards';
+
 const state = {
-  currentLevel: null,
-  currentGroup: 0,
-  currentMode: 'quiz',
-  currentIndex: 0,
-  answers: {},
-  correct: 0,
-  total: 0,
-  streak: 0,
-  learned: new Set(),
-  flipped: false
+  currentLevel: null, currentGroup: 0, currentMode: 'quiz',
+  currentIndex: 0, attempts: 0, answered: false, isCorrect: false, selected: null,
+  correct: 0, total: 0, streak: 0,
+  learned: new Set(), flipped: false,
+  mastery: {},
+  customCards: [],
 };
+
 const $ = s => document.querySelector(s);
 const content = $('#content');
-const uploadZone = $('#uploadZone');
-const fileInput = $('#fileInput');
 
-function init() {
-  state.currentLevel = Object.keys(DATA)[0];
-  state.currentGroup = 0;
-  renderLevelTabs(); renderGroupTabs(); renderContent(); updateStats();
+// ===== PERSISTENCE =====
+function saveProgress() {
+  const obj = {
+    currentLevel: state.currentLevel, currentGroup: state.currentGroup,
+    currentMode: state.currentMode, currentIndex: state.currentIndex,
+    mastery: state.mastery, correct: state.correct, total: state.total,
+    streak: state.streak,
+  };
+  try { localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(obj)); } catch(e) {}
 }
 
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_PROGRESS);
+    if (!raw) return;
+    const obj = JSON.parse(raw);
+    if (obj.currentLevel && DATA[obj.currentLevel]) state.currentLevel = obj.currentLevel;
+    state.currentGroup = obj.currentGroup || 0;
+    state.currentMode = obj.currentMode || 'quiz';
+    state.currentIndex = obj.currentIndex || 0;
+    state.mastery = obj.mastery || {};
+    state.correct = obj.correct || 0;
+    state.total = obj.total || 0;
+    state.streak = obj.streak || 0;
+    Object.entries(state.mastery).forEach(([k, v]) => { if (v) state.learned.add(k); });
+  } catch(e) {}
+}
+
+function loadCustomCards() {
+  try {
+    const raw = localStorage.getItem(STORAGE_CARDS);
+    state.customCards = raw ? JSON.parse(raw) : [];
+  } catch(e) { state.customCards = []; }
+}
+
+function saveCustomCards() {
+  try { localStorage.setItem(STORAGE_CARDS, JSON.stringify(state.customCards)); } catch(e) {}
+}
+
+function resetProgress() {
+  if (!confirm('Xóa tiến trình? Bạn sẽ học lại từ đầu.')) return;
+  try { localStorage.removeItem(STORAGE_PROGRESS); } catch(e) {}
+  state.mastery = {}; state.learned = new Set();
+  state.correct = 0; state.total = 0; state.streak = 0;
+  state.currentLevel = Object.keys(DATA)[0];
+  state.currentGroup = 0; state.currentIndex = 0;
+  renderLevelTabs(); renderGroupTabs(); renderContent(); updateStats(); updateProgress();
+}
+$('#resetBtn').addEventListener('click', resetProgress);
+
+// ===== EXPORT / IMPORT =====
+function exportCards() {
+  if (!state.customCards.length) { alert('Chưa có thẻ nào để export.'); return; }
+  const blob = new Blob([JSON.stringify(state.customCards, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'custom_cards.json';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function importCards() {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json';
+  input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const cards = JSON.parse(ev.target.result);
+        if (!Array.isArray(cards)) throw new Error('Invalid format');
+        let added = 0;
+        cards.forEach(c => {
+          if (c.hanzi && c.pinyin && c.meaning) {
+            const exists = state.customCards.some(x => x.hanzi === c.hanzi && x.pinyin === c.pinyin);
+            if (!exists) { state.customCards.push(c); added++; }
+          }
+        });
+        saveCustomCards();
+        renderMyCards();
+        alert('Đã import ' + added + ' thẻ mới!');
+      } catch(err) { alert('Lỗi đọc file: ' + err.message); }
+    };
+    reader.readAsText(file);
+  });
+  input.click();
+}
+
+// ===== INIT =====
+function init() {
+  loadProgress();
+  loadCustomCards();
+  if (!state.currentLevel) state.currentLevel = Object.keys(DATA)[0];
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === state.currentMode);
+  });
+  renderLevelTabs(); renderGroupTabs(); renderContent(); updateStats(); updateProgress();
+}
+
+// ===== LEVEL TABS =====
 function renderLevelTabs() {
   const tabs = $('#levelTabs'); tabs.innerHTML = '';
   Object.keys(DATA).forEach(level => {
@@ -166,8 +288,8 @@ function renderLevelTabs() {
     tab.textContent = level + ' (' + total + ')';
     tab.addEventListener('click', () => {
       state.currentLevel = level; state.currentGroup = 0; state.currentIndex = 0;
-      state.answers = {}; state.flipped = false;
-      renderLevelTabs(); renderGroupTabs(); renderContent(); updateProgress();
+      state.attempts = 0; state.answered = false;
+      renderLevelTabs(); renderGroupTabs(); renderContent(); updateProgress(); saveProgress();
     });
     tabs.appendChild(tab);
   });
@@ -182,18 +304,21 @@ function renderGroupTabs() {
     tab.textContent = 'Nhóm ' + (idx + 1);
     tab.addEventListener('click', () => {
       state.currentGroup = idx; state.currentIndex = 0;
-      state.answers = {}; state.flipped = false;
-      renderGroupTabs(); renderContent(); updateProgress();
+      state.attempts = 0; state.answered = false;
+      renderGroupTabs(); renderContent(); updateProgress(); saveProgress();
     });
     tabs.appendChild(tab);
   });
 }
 
+// ===== MODE TOGGLE =====
 document.querySelectorAll('.mode-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    state.currentMode = btn.dataset.mode; state.flipped = false; renderContent();
+    state.currentMode = btn.dataset.mode;
+    state.flipped = false; state.attempts = 0; state.answered = false;
+    renderContent(); saveProgress();
   });
 });
 
@@ -204,6 +329,7 @@ function getItems() {
 
 function renderContent() {
   const items = getItems();
+  if (state.currentMode === 'mycards') { renderMyCardsForm(); return; }
   if (!items.length) {
     content.innerHTML = '<div class="card"><p style="text-align:center;color:var(--text-light)">Nhóm này chưa có dữ liệu</p></div>';
     return;
@@ -214,10 +340,9 @@ function renderContent() {
   updateProgress();
 }
 
+// ===== QUIZ =====
 function renderQuiz(items) {
   const item = items[state.currentIndex];
-  const answered = state.answers[state.currentIndex];
-  const isCorrect = answered && answered.correct;
   const types = ['meaning', 'hanzi', 'pinyin'];
   const qType = types[state.currentIndex % 3];
   let qHTML = '';
@@ -229,15 +354,15 @@ function renderQuiz(items) {
     qHTML = '<div class="hanzi">' + esc(item.hanzi) + '</div><div class="meaning-q" style="font-size:1rem">' + esc(item.meaning) + '</div><div class="meaning-q">Chọn pinyin đúng:</div>';
   }
   const optionsHTML = generateOptions(item, qType, items);
+  const attemptsText = state.answered ? '' : '<span class="attempts-text">' + (state.attempts > 0 ? 'Lần: ' + state.attempts + '/3' : '') + '</span>';
+  const cardCls = 'card' + (state.answered ? (state.isCorrect ? ' correct' : ' wrong-final') : '');
   content.innerHTML =
-    '<div class="card ' + (answered ? (isCorrect ? 'correct' : 'wrong') : '') + '" id="quizCard">' +
-    '<div class="card-header"><span class="card-level">' + esc(state.currentLevel) + ' · Nhóm ' + (state.currentGroup + 1) + '</span><span class="card-type">' + esc(item.type) + '</span></div>' +
+    '<div class="' + cardCls + '" id="quizCard">' +
+    '<div class="card-header"><span class="card-level">' + esc(state.currentLevel) + ' · Nhóm ' + (state.currentGroup + 1) + '</span><span class="card-type">' + esc(item.type) + '</span>' + attemptsText + '</div>' +
     qHTML + '<div class="options" id="options">' + optionsHTML + '</div>' +
-    '<div class="feedback ' + (answered ? (isCorrect ? 'correct show' : 'wrong show') : '') + '" id="feedback">' +
-    (answered ? (isCorrect ? 'Chính xác!' : 'Sai rồi! Đáp án: ' + esc(getCorrectAnswer(item, qType))) : '') +
-    '</div></div>';
-  if (!answered) {
-    document.querySelectorAll('.option').forEach(opt => {
+    '<div class="feedback" id="feedback"></div></div>';
+  if (!state.answered) {
+    document.querySelectorAll('.option:not(.disabled)').forEach(opt => {
       opt.addEventListener('click', () => selectOption(opt, item, qType, items));
     });
   }
@@ -250,72 +375,202 @@ function generateOptions(item, qType, allItems) {
   wrongs = [...new Set(wrongs)];
   const picked = shuffle(wrongs).slice(0, 3);
   const options = shuffle([correct, ...picked]);
-  const answered = state.answers[state.currentIndex];
   return options.map(opt => {
     let cls = 'option';
-    if (answered) {
-      if (opt === correct) cls += ' correct-answer';
-      else if (opt === answered.selected && !answered.correct) cls += ' wrong-answer';
+    if (state.answered) {
+      if (opt === correct) cls = 'option correct-answer';
+      else if (opt === state.selected && !state.isCorrect) cls = 'option wrong-answer';
+      else cls += ' disabled';
     }
     return '<div class="' + cls + '" data-value="' + esc(opt) + '">' + esc(opt) + '</div>';
   }).join('');
 }
 
-function getCorrectAnswer(item, qType) {
-  if (qType === 'meaning') return item.meaning;
-  if (qType === 'hanzi') return item.hanzi;
-  return item.pinyin;
-}
-
 function selectOption(opt, item, qType) {
-  if (state.answers[state.currentIndex]) return;
+  if (state.answered) return;
   const selected = opt.dataset.value;
   const field = qType === 'hanzi' ? 'hanzi' : qType === 'pinyin' ? 'pinyin' : 'meaning';
   const correct = item[field];
   const isCorrect = selected === correct;
-  state.answers[state.currentIndex] = { selected, correct: isCorrect };
-  state.total++;
+  state.attempts++; state.selected = selected;
+
   if (isCorrect) {
-    state.correct++; state.streak++; state.learned.add(item.hanzi);
+    state.answered = true; state.isCorrect = true;
+    state.correct++; state.total++; state.streak++;
+    state.mastery[item.hanzi] = true; state.learned.add(item.hanzi);
     opt.classList.add('correct-answer');
-    $('#feedback').textContent = 'Chính xác!';
-    $('#feedback').className = 'feedback correct show';
+    const fb = $('#feedback'); fb.textContent = 'Chính xác! ✓'; fb.className = 'feedback correct show';
     $('#quizCard').classList.add('correct', 'pop');
+    updateStats(); saveProgress();
+    setTimeout(() => {
+      if (state.currentIndex < getItems().length - 1) {
+        state.currentIndex++; state.attempts = 0; state.answered = false; state.selected = null;
+        renderContent(); saveProgress();
+      } else { renderResult(getItems()); }
+    }, 600);
   } else {
-    state.streak = 0;
-    opt.classList.add('wrong-answer');
-    document.querySelectorAll('.option').forEach(o => { if (o.dataset.value === correct) o.classList.add('correct-answer'); });
-    $('#feedback').textContent = 'Sai rồi! Đáp án: ' + correct;
-    $('#feedback').className = 'feedback wrong show';
-    $('#quizCard').classList.add('wrong', 'shake');
+    state.total++; state.streak = 0; updateStats(); saveProgress();
+    opt.classList.add('wrong-answer', 'shake', 'disabled');
+    if (state.attempts >= 3) {
+      state.answered = true; state.isCorrect = false; state.mastery[item.hanzi] = false;
+      document.querySelectorAll('.option').forEach(o => {
+        if (o.dataset.value === correct) o.classList.add('correct-answer');
+        else o.classList.add('disabled');
+      });
+      const fb = $('#feedback'); fb.textContent = 'Sai rồi! Đáp án: ' + correct;
+      fb.className = 'feedback wrong-final show';
+      $('#quizCard').classList.add('wrong-final');
+      saveProgress();
+      setTimeout(() => {
+        if (state.currentIndex < getItems().length - 1) {
+          state.currentIndex++; state.attempts = 0; state.answered = false; state.selected = null;
+          renderContent(); saveProgress();
+        } else { renderResult(getItems()); }
+      }, 1200);
+    } else {
+      const fb = $('#feedback'); fb.textContent = 'Sai rồi! Còn ' + (3 - state.attempts) + ' lần thử nữa.';
+      fb.className = 'feedback wrong show';
+      setTimeout(() => opt.classList.remove('shake'), 400);
+    }
   }
-  updateStats();
 }
 
+function renderResult(items) {
+  const correctCount = Object.keys(state.mastery).filter(k => state.mastery[k]).length;
+  content.innerHTML = '<div class="result"><div class="score">' + Math.round(correctCount / items.length * 100) + '%</div><div class="msg">Hoàn thành nhóm này!</div><div class="detail">' + correctCount + ' / ' + items.length + ' từ đã thuộc</div></div>';
+  if (correctCount === items.length) launchConfetti();
+}
+
+// ===== FLASHCARD =====
 function renderFlashcard(items) {
   const item = items[state.currentIndex];
+  const mastered = state.mastery[item.hanzi];
   content.innerHTML =
     '<div class="card"><div class="card-header"><span class="card-level">' + esc(state.currentLevel) + ' · Nhóm ' + (state.currentGroup + 1) + '</span><span class="card-type">' + esc(item.type) + '</span></div>' +
     '<div class="flashcard ' + (state.flipped ? 'flipped' : '') + '" id="flashcard">' +
     '<div class="flashcard-inner">' +
     '<div class="flashcard-front"><div class="hanzi">' + esc(item.hanzi) + '</div><div class="flip-hint">Nhấn để lật</div></div>' +
-    '<div class="flashcard-back"><div class="info"><div class="pinyin">' + esc(item.pinyin) + '</div><div class="meaning">' + esc(item.meaning) + '</div></div></div>' +
+    '<div class="flashcard-back"><div class="info"><div class="pinyin">' + esc(item.pinyin) + '</div><div class="meaning">' + esc(item.meaning) + '</div>' + (mastered !== undefined ? '<div style="margin-top:6px;font-size:.72rem;color:' + (mastered ? 'var(--success)' : 'var(--error)') + '">' + (mastered ? '✓ Đã thuộc' : '✗ Chưa thuộc') + '</div>' : '') + '</div></div>' +
     '</div></div></div>';
   $('#flashcard').addEventListener('click', () => { state.flipped = !state.flipped; $('#flashcard').classList.toggle('flipped'); });
 }
 
+// ===== LIST =====
 function renderList(items) {
   content.innerHTML =
     '<div class="card"><div class="card-header"><span class="card-level">' + esc(state.currentLevel) + ' · Nhóm ' + (state.currentGroup + 1) + '</span><span class="card-type">' + items.length + ' mục</span></div>' +
-    '<div class="vocab-list">' + items.map(item =>
-      '<div class="vocab-item"><div class="char">' + esc(item.hanzi) + '</div><div class="info"><div class="py">' + esc(item.pinyin) + '</div><div class="mean">' + esc(item.meaning) + '</div></div></div>'
-    ).join('') + '</div></div>';
+    '<div class="vocab-list">' + items.map(item => {
+      const m = state.mastery[item.hanzi];
+      const badge = m === true ? '<span class="badge done">✓ Thuộc</span>' : m === false ? '<span class="badge failed">✗ Sai</span>' : '';
+      return '<div class="vocab-item"><div class="char">' + esc(item.hanzi) + '</div><div class="info"><div class="py">' + esc(item.pinyin) + '</div><div class="mean">' + esc(item.meaning) + '</div></div>' + badge + '</div>';
+    }).join('') + '</div></div>';
 }
 
-$('#prevBtn').addEventListener('click', () => { if (state.currentIndex > 0) { state.currentIndex--; state.flipped = false; renderContent(); } });
-$('#nextBtn').addEventListener('click', () => { const items = getItems(); if (state.currentIndex < items.length - 1) { state.currentIndex++; state.flipped = false; renderContent(); } });
+// ===== MY CARDS (Custom Flashcards) =====
+function renderMyCardsForm() {
+  const lessons = Object.keys(DATA).join(',');
+  content.innerHTML =
+    '<div class="card add-card-section">' +
+    '  <h3>📝 Thêm thẻ từ vựng mới</h3>' +
+    '  <div class="form-row">' +
+    '    <div class="form-group"><label>Chữ Hán</label><input type="text" id="cardHanzi" placeholder="例: 吃饭" autocomplete="off"></div>' +
+    '    <div class="form-group"><label>Pinyin</label><input type="text" id="cardPinyin" placeholder="例: chī fàn" autocomplete="off"></div>' +
+    '  </div>' +
+    '  <div class="form-row">' +
+    '    <div class="form-group"><label>Nghĩa tiếng Việt</label><input type="text" id="cardMeaning" placeholder="例: ăn cơm" autocomplete="off"></div>' +
+    '    <div class="form-group"><label>Bài</label><input type="text" id="cardLesson" placeholder="例: Bài 16" autocomplete="off"></div>' +
+    '  </div>' +
+    '  <div class="form-actions">' +
+    '    <button class="btn-add" id="addCardBtn">＋ Thêm thẻ</button>' +
+    '  </div>' +
+    '</div>' +
+    '<div class="card">' +
+    '  <div class="form-actions" style="margin-bottom:12px">' +
+    '    <button class="btn-export" id="exportBtn">📥 Export JSON</button>' +
+    '    <button class="btn-import" id="importBtn">📤 Import JSON</button>' +
+    '  </div>' +
+    '  <div class="my-cards-list">' +
+    '    <h3>Thẻ của tui (' + state.customCards.length + ')</h3>' +
+    '    <div id="myCardsList"></div>' +
+    '  </div>' +
+    '</div>';
+
+  $('#addCardBtn').addEventListener('click', addCard);
+  $('#exportBtn').addEventListener('click', exportCards);
+  $('#importBtn').addEventListener('click', importCards);
+
+  // Enter key to add
+  ['cardHanzi','cardPinyin','cardMeaning','cardLesson'].forEach(id => {
+    $('#' + id).addEventListener('keydown', e => { if (e.key === 'Enter') addCard(); });
+  });
+
+  renderMyCardsList();
+}
+
+function addCard() {
+  const hanzi = ($('#cardHanzi').value || '').trim();
+  const pinyin = ($('#cardPinyin').value || '').trim();
+  const meaning = ($('#cardMeaning').value || '').trim();
+  const lesson = ($('#cardLesson').value || '').trim() || 'Thẻ của tui';
+
+  if (!hanzi || !meaning) { alert('Nhập ít nhất Chữ Hán và Nghĩa!'); return; }
+  if (state.customCards.some(c => c.hanzi === hanzi && c.pinyin === pinyin)) { alert('Thẻ này đã tồn tại!'); return; }
+
+  state.customCards.push({ hanzi, pinyin, meaning, lesson, type: 'từ vựng', grammar: '', example: '' });
+  saveCustomCards();
+
+  // Clear inputs
+  $('#cardHanzi').value = '';
+  $('#cardPinyin').value = '';
+  $('#cardMeaning').value = '';
+  $('#cardLesson').value = '';
+  $('#cardHanzi').focus();
+
+  renderMyCardsList();
+}
+
+function renderMyCardsList() {
+  const container = $('#myCardsList');
+  if (!container) return;
+  const heading = container.previousElementSibling;
+  if (heading) heading.textContent = 'Thẻ của tui (' + state.customCards.length + ')';
+
+  if (!state.customCards.length) {
+    container.innerHTML = '<p style="text-align:center;color:var(--text-light);font-size:.82rem;padding:16px">Chưa có thẻ nào. Thêm ở trên nha!</p>';
+    return;
+  }
+
+  container.innerHTML = state.customCards.map((c, i) =>
+    '<div class="my-card-item">' +
+    '  <div class="char">' + esc(c.hanzi) + '</div>' +
+    '  <div class="info"><div class="py">' + esc(c.pinyin) + '</div><div class="mean">' + esc(c.meaning) + '</div></div>' +
+    '  <button class="del-btn" data-idx="' + i + '" title="Xóa">🗑</button>' +
+    '</div>'
+  ).join('');
+
+  container.querySelectorAll('.del-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx);
+      state.customCards.splice(idx, 1);
+      saveCustomCards();
+      renderMyCardsList();
+    });
+  });
+}
+
+// ===== NAV =====
+$('#prevBtn').addEventListener('click', () => {
+  if (state.currentMode === 'mycards') return;
+  if (state.currentIndex > 0) { state.currentIndex--; state.attempts = 0; state.answered = false; state.selected = null; state.flipped = false; renderContent(); saveProgress(); }
+});
+$('#nextBtn').addEventListener('click', () => {
+  if (state.currentMode === 'mycards') return;
+  const items = getItems();
+  if (state.currentIndex < items.length - 1) { state.currentIndex++; state.attempts = 0; state.answered = false; state.selected = null; state.flipped = false; renderContent(); saveProgress(); }
+});
 
 function updateProgress() {
+  if (state.currentMode === 'mycards') { $('#progressFill').style.width = '0%'; $('#progressText').textContent = state.customCards.length + ' thẻ'; return; }
   const items = getItems();
   const pct = items.length ? ((state.currentIndex + 1) / items.length * 100) : 0;
   $('#progressFill').style.width = pct + '%';
@@ -353,6 +608,7 @@ function launchConfetti() {
 }
 
 document.addEventListener('keydown', e => {
+  if (state.currentMode === 'mycards') return;
   if (e.key === 'ArrowRight') $('#nextBtn').click();
   if (e.key === 'ArrowLeft') $('#prevBtn').click();
   if (e.key === ' ' && state.currentMode === 'flashcard') { e.preventDefault(); state.flipped = !state.flipped; const fc = $('#flashcard'); if (fc) fc.classList.toggle('flipped'); }
@@ -360,71 +616,6 @@ document.addEventListener('keydown', e => {
 
 function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
 function shuffle(a) { const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
-function chunkArr(arr, size) { const chunks=[]; for(let i=0;i<arr.length;i+=size) chunks.push(arr.slice(i,i+size)); return chunks; }
-
-uploadZone.addEventListener('click', () => fileInput.click());
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); uploadZone.classList.add('dragover'); });
-uploadZone.addEventListener('dragleave', e => { e.preventDefault(); uploadZone.classList.remove('dragover'); });
-uploadZone.addEventListener('drop', e => { e.preventDefault(); e.stopPropagation(); uploadZone.classList.remove('dragover'); if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]); });
-fileInput.addEventListener('change', e => { if(e.target.files.length) handleFile(e.target.files[0]); });
-
-function handleFile(file) {
-  const ext = file.name.split('.').pop().toLowerCase();
-  if (!['xlsx','xls'].includes(ext)) { alert('Chỉ hỗ trợ file Excel (.xlsx, .xls)'); return; }
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    try {
-      const wb = XLSX.read(ev.target.result, {type:'array'});
-      const newData = {};
-      wb.SheetNames.forEach(name => {
-        const sheet = wb.Sheets[name];
-        const rows = XLSX.utils.sheet_to_json(sheet, {header:1, defval:''});
-        if (!rows.length) return;
-        let headerIdx = -1, colMap = {};
-        for (let i = 0; i < Math.min(rows.length, 5); i++) {
-          const row = rows[i];
-          const joined = row.map(String).join(' ').toLowerCase();
-          if (joined.includes('chữ hán') || joined.includes('汉字') || joined.includes('hán') || joined.includes('pinyin') || joined.includes('phiên âm')) {
-            headerIdx = i;
-            row.forEach((val, ci) => {
-              const v = String(val).toLowerCase().trim();
-              if (v.includes('hán') || v.includes('chữ') || v.includes('汉字')) colMap.hanzi = ci;
-              else if (v.includes('phiên âm') || v.includes('pinyin')) colMap.pinyin = ci;
-              else if (v.includes('nghĩa') || v.includes('tiếng việt')) colMap.meaning = ci;
-            });
-            if (!colMap.hanzi) { const used = new Set(Object.values(colMap)); for (let c = 0; c < row.length; c++) { if (!used.has(c) && rows[headerIdx+1] && /[一-鿿]/.test(String(rows[headerIdx+1][c]||''))) { colMap.hanzi = c; break; } } if (!colMap.hanzi) colMap.hanzi = 0; }
-            if (!colMap.pinyin) { const used = new Set(Object.values(colMap)); for (let c = 0; c < row.length; c++) { if (!used.has(c)) { colMap.pinyin = c; break; } } }
-            if (!colMap.meaning) { const used = new Set(Object.values(colMap)); for (let c = 0; c < row.length; c++) { if (!used.has(c)) { colMap.meaning = c; break; } } }
-            break;
-          }
-        }
-        if (headerIdx === -1) return;
-        const items = [];
-        for (let i = headerIdx + 1; i < rows.length; i++) {
-          const r = rows[i];
-          const hanzi = String(r[colMap.hanzi]||'').trim();
-          const pinyin = colMap.pinyin !== undefined ? String(r[colMap.pinyin]||'').trim() : '';
-          const meaning = colMap.meaning !== undefined ? String(r[colMap.meaning]||'').trim() : '';
-          if (!hanzi && !pinyin && !meaning) continue;
-          items.push({ hanzi, pinyin, meaning, type: 'từ vựng', grammar: '', example: '' });
-        }
-        const key = name.replace(/\s+/g,' ').trim();
-        if (!newData[key]) newData[key] = [];
-        newData[key].push(...items);
-      });
-      const grouped = {};
-      Object.entries(newData).forEach(([level, items]) => { grouped[level] = chunkArr(items, 15); });
-      Object.keys(DATA).forEach(k => delete DATA[k]);
-      Object.assign(DATA, grouped);
-      state.currentLevel = Object.keys(DATA)[0]; state.currentGroup = 0; state.currentIndex = 0;
-      state.answers = {}; state.flipped = false;
-      renderLevelTabs(); renderGroupTabs(); renderContent(); updateStats();
-      const total = Object.values(DATA).reduce((s,g) => s + g.reduce((a,b) => a + b.length, 0), 0);
-      alert('Đã load ' + total + ' mục từ file!');
-    } catch(err) { alert('Lỗi đọc file: ' + err.message); }
-  };
-  reader.readAsArrayBuffer(file);
-}
 
 init();
 </script>
