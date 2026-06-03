@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSK3 Mock Test - 汉语吗？</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>HSK3 Mock Test</h1>
+      <p>Thi thử HSK3 · 3 phần: Nghe (fake), Đọc, Viết · Tự chấm điểm</p>
+    </header>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="num" id="hskTotal">0</div>
+        <div class="label">Tổng câu</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="hskDone">0</div>
+        <div class="label">Đã làm</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="hskScore">0</div>
+        <div class="label">Câu đúng</div>
+      </div>
+    </div>
+
+    <div class="mode-toggle" style="margin-bottom:10px">
+      <button class="mode-btn active" data-section="listening">Phần 1 · Nghe</button>
+      <button class="mode-btn" data-section="reading">Phần 2 · Đọc</button>
+      <button class="mode-btn" data-section="writing">Phần 3 · Viết</button>
+    </div>
+
+    <div id="testRoot"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary" id="btnResetTest">🔄 Làm lại</button>
+      <button class="btn btn-primary" id="btnCheckAll">✅ Chấm điểm</button>
+    </div>
+  </div>
+
+  <script>
+    // Minimal HSK3 test: only reading/writing are real MCQs; listening is note-only
+    const HSK3_ITEMS = {
+      listening: [
+        {
+          id: 'L1',
+          type: 'note',
+          text: 'Phần nghe HSK3 cần audio, ở đây chỉ note mô phỏng cấu trúc: 10 câu chọn tranh, 10 câu Đúng/Sai, 20 câu chọn đáp án.'
+        }
+      ],
+      reading: [
+        {
+          id: 'R1',
+          type: 'mcq',
+          question: '你每天怎么来公司？',
+          options: ['我每天坐公共汽车来公司。', '我明天想去公司。', '我在公司吃早饭。', '公司在我家旁边。'],
+          answer: 0,
+          explain: '"怎么来公司" hỏi cách đi, nên chọn câu có phương tiện di chuyển.'
+        },
+        {
+          id: 'R2',
+          type: 'mcq',
+          question: '下班以后，他常常做什么？',
+          passage: '他下班以后一般先吃饭，然后跑步或者看书。',
+          options: ['先跑步，再吃饭。', '下班以后只看书。', '先吃饭，再跑步或者看书。', '下班以后什么都不做。'],
+          answer: 2,
+          explain: 'Đoạn văn nói rõ thứ tự: 先吃饭，然后跑步或者看书。'
+        },
+        {
+          id: 'R3',
+          type: 'tf',
+          passage: '周末她打算跟朋友一起去北京旅游。',
+          statement: '她一个人去北京。',
+          answer: false,
+          explain: 'Câu gốc nói "跟朋友一起", không phải một mình.'
+        }
+      ],
+      writing: [
+        {
+          id: 'W1',
+          type: 'order',
+          words: ['今天', '很', '天气', '好'],
+          answer: '今天天气很好。'
+        },
+        {
+          id: 'W2',
+          type: 'order',
+          words: ['我', '喜欢', '喝', '中国茶'],
+          answer: '我喜欢喝中国茶。'
+        }
+      ]
+    };
+
+    const testState = {
+      answers: {},
+      checked: false
+    };
+
+    const $ = s => document.querySelector(s);
+
+    function initHSK3() {
+      const total = HSK3_ITEMS.reading.filter(x => x.type !== 'note').length +
+                    HSK3_ITEMS.writing.length;
+      $('#hskTotal').textContent = total;
+      $('#hskDone').textContent = 0;
+      $('#hskScore').textContent = 0;
+
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderSection(btn.dataset.section);
+        });
+      });
+
+      $('#btnResetTest').addEventListener('click', resetTest);
+      $('#btnCheckAll').addEventListener('click', checkAll);
+
+      renderSection('listening');
+    }
+
+    function renderSection(section) {
+      const root = $('#testRoot');
+      const list = HSK3_ITEMS[section];
+      if (!list) { root.innerHTML = '<p>Không có dữ liệu.</p>'; return; }
+
+      if (section === 'listening') {
+        root.innerHTML = list.map(item => `
+          <div class="card">
+            <div class="card-header">
+              <span class="card-level">Phần Nghe</span>
+              <span class="card-type">Ghi chú cấu trúc</span>
+            </div>
+            <p style="font-size:.9rem;color:var(--text-light)">${item.text}</p>
+          </div>
+        `).join('');
+        return;
+      }
+
+      root.innerHTML = list.map(item => renderItem(section, item)).join('');
+      attachHandlers(section, list);
+      refreshStats();
+    }
+
+    function renderItem(section, item) {
+      if (section === 'reading') {
+        if (item.type === 'mcq') {
+          return `
+            <div class="card" data-id="${item.id}">
+              <div class="card-header">
+                <span class="card-level">Đọc · Chọn đáp án</span>
+                <span class="card-type">${item.id}</span>
+              </div>
+              ${item.passage ? `<p style="font-size:.9rem;margin-bottom:8px">${item.passage}</p>` : ''}
+              <p class="meaning-q">${item.question}</p>
+              <div class="options">
+                ${item.options.map((opt, idx) => `
+                  <div class="option" data-idx="${idx}">${opt}</div>
+                `).join('')}
+              </div>
+              <div class="feedback" data-fb="${item.id}"></div>
+            </div>
+          `;
+        } else if (item.type === 'tf') {
+          return `
+            <div class="card" data-id="${item.id}">
+              <div class="card-header">
+                <span class="card-level">Đọc · Đúng/Sai</span>
+                <span class="card-type">${item.id}</span>
+              </div>
+              <p style="font-size:.9rem;margin-bottom:8px">${item.passage}</p>
+              <p class="meaning-q">${item.statement}</p>
+              <div class="options">
+                <div class="option" data-value="true">对 (Đúng)</div>
+                <div class="option" data-value="false">错 (Sai)</div>
+              </div>
+              <div class="feedback" data-fb="${item.id}"></div>
+            </div>
+          `;
+        }
+      }
+
+      if (section === 'writing') {
+        return `
+          <div class="card" data-id="${item.id}">
+            <div class="card-header">
+              <span class="card-level">Viết · Sắp xếp từ</span>
+              <span class="card-type">${item.id}</span>
+            </div>
+            <p class="meaning-q">Sắp xếp thành câu đúng:</p>
+            <p style="text-align:center;margin-bottom:8px">${item.words.join('  ')}</p>
+            <input type="text" class="writing-input" data-id="${item.id}" placeholder="Nhập câu tiếng Trung..." style="width:100%;padding:8px 10px;border-radius:10px;border:1.5px solid #f7bfc4;font-size:.9rem" />
+            <div class="feedback" data-fb="${item.id}"></div>
+          </div>
+        `;
+      }
+
+      return '';
+    }
+
+    function attachHandlers(section, list) {
+      if (section === 'reading') {
+        list.forEach(item => {
+          const card = document.querySelector(`.card[data-id="${item.id}"]`);
+          if (!card) return;
+          const options = card.querySelectorAll('.option');
+          options.forEach(opt => {
+            opt.addEventListener('click', () => {
+              options.forEach(o => o.classList.remove('correct-answer', 'wrong-answer'));
+              if (item.type === 'mcq') {
+                const idx = Number(opt.dataset.idx);
+                testState.answers[item.id] = idx;
+              } else if (item.type === 'tf') {
+                const val = opt.dataset.value === 'true';
+                testState.answers[item.id] = val;
+              }
+              opt.classList.add('pop');
+              setTimeout(() => opt.classList.remove('pop'), 300);
+              refreshStats();
+            });
+          });
+        });
+      }
+
+      if (section === 'writing') {
+        list.forEach(item => {
+          const input = document.querySelector(`.writing-input[data-id="${item.id}"]`);
+          if (!input) return;
+          input.addEventListener('input', () => {
+            testState.answers[item.id] = input.value.trim();
+            refreshStats();
+          });
+        });
+      }
+    }
+
+    function resetTest() {
+      if (!confirm('Làm lại toàn bộ bài test?')) return;
+      testState.answers = {};
+      testState.checked = false;
+      renderSection(document.querySelector('.mode-btn.active').dataset.section);
+      refreshStats();
+    }
+
+    function checkAll() {
+      let correct = 0;
+      let done = 0;
+
+      HSK3_ITEMS.reading.forEach(item => {
+        const fb = document.querySelector(`.feedback[data-fb="${item.id}"]`);
+        if (!fb) return;
+        fb.classList.remove('correct', 'wrong', 'show');
+
+        const userAns = testState.answers[item.id];
+        if (userAns === undefined) return;
+        done++;
+        let ok = false;
+        if (item.type === 'mcq' && typeof userAns === 'number') ok = userAns === item.answer;
+        if (item.type === 'tf' && typeof userAns === 'boolean') ok = userAns === item.answer;
+
+        if (ok) {
+          correct++;
+          fb.textContent = '✓ Đúng';
+          fb.classList.add('correct', 'show');
+        } else {
+          fb.textContent = '✗ Sai · ' + (item.explain || '');
+          fb.classList.add('wrong', 'show');
+        }
+      });
+
+      HSK3_ITEMS.writing.forEach(item => {
+        const fb = document.querySelector(`.feedback[data-fb="${item.id}"]`);
+        const userAns = (testState.answers[item.id] || '').replace(/\s+/g, '');
+        if (!fb) return;
+        fb.classList.remove('correct', 'wrong', 'show');
+        if (!userAns) return;
+        done++;
+        const correctAns = item.answer.replace(/\s+/g, '');
+        if (userAns === correctAns) {
+          correct++;
+          fb.textContent = '✓ Đúng';
+          fb.classList.add('correct', 'show');
+        } else {
+          fb.textContent = '✗ Sai · Đáp án: ' + item.answer;
+          fb.classList.add('wrong', 'show');
+        }
+      });
+
+      $('#hskDone').textContent = done;
+      $('#hskScore').textContent = correct;
+      testState.checked = true;
+    }
+
+    function refreshStats() {
+      let done = 0;
+      Object.keys(testState.answers).forEach(id => {
+        const v = testState.answers[id];
+        if (v !== undefined && v !== '') done++;
+      });
+      $('#hskDone').textContent = done;
+    }
+
+    document.addEventListener('DOMContentLoaded', initHSK3);
+  </script>
+</body>
+</html>
